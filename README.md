@@ -1,5 +1,5 @@
 # AssaultCube-Hack
-My journey to reverse engineering and writing cheat. I will try to update as my journey goes on@
+My journey to reverse engineering and writing cheat. I will try to update as my journey goes on!
 
 ## Reverse Engineer to find offset
 Tool: Cheat Engine & Reclass
