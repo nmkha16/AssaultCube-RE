@@ -6,12 +6,12 @@ Tool: Cheat Engine & Reclass
 
 ### Finding Local Player offset
 
-> You can do that by scanning for health or ammo value then see what accesses the address, perform pointer scan to check to validate the correct pointer.
+> You can do that by scanning for health or ammo value then see what accesses the address, perform pointer scan to check and validate the correct pointer.
 We can get the offset via that pointer in CE.
 
 ### Heading to Reclass
 
-> Paste the pointer we found into Reclass, we get access to fields in LocalPlayer.
+> Paste the pointer we found into Reclass, we get access to struct/class LocalPlayer.
 
 > Then mess around the game and see which address is doing and use your head to figure that out.
 
