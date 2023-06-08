@@ -1,6 +1,10 @@
 #pragma once
 #include <iostream>
 
+namespace Offset {
+	DWORD localPlayerOffset = 0x109B74;
+}
+
 // Created with ReClass.NET 1.2 by KN4CK3R
 
 class pLocalPlayer
@@ -16,21 +20,17 @@ public:
 	float roll; //0x0048
 	char pad_004C[172]; //0x004C
 	int32_t health; //0x00F8
-	float armor; //0x00FC
-	char pad_0100[60]; //0x0100
+	int32_t armor; //0x00FC
+	char pad_0100[40]; //0x0100
+	int32_t rifleAmmoReserved; //0x0128
+	char pad_012C[8]; //0x012C
+	int32_t dualPistolAmmoReserved; //0x0134
+	char pad_0138[4]; //0x0138
 	int32_t pistolAmmo; //0x013C
 	char pad_0140[16]; //0x0140
-	int32_t rifleAmmo; //0x0150
+	float rifleAmmo; //0x0150
 	char pad_0154[4]; //0x0154
 	int32_t nadesCount; //0x0158
-	char pad_015C[44]; //0x015C
-	int32_t meleeAtackCount; //0x0188
-	int32_t pistolShotCount; //0x018C
-	char pad_0190[16]; //0x0190
-	int32_t rifleShotCount; //0x01A0
-	char pad_01A4[3740]; //0x01A4
+	int32_t dualPistolAmmo; //0x015C
+	char pad_0160[3808]; //0x0160
 }; //Size: 0x1040
-
-namespace Offset {
-	DWORD localPlayerOffset = 0x109B74;
-}
