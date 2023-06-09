@@ -111,9 +111,8 @@ void CheatCheck() {
     if (CheatState::isFreezeAmmo) {
         *GameAddress::currentWeaponAmmo = 999;
     }
-    // turn this on after you get a nades to avoid conflict
     if (CheatState::isFreezeNades) {
-        GameAddress::localPlayerPtr->nadesCount = 1;
+        GameAddress::localPlayerPtr->nadesCount = 99;
     }
 }
 
