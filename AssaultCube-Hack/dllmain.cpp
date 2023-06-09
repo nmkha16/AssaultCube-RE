@@ -6,9 +6,14 @@
 FILE* f = nullptr;
 HANDLE hConsole = nullptr;
 
+// multi-lever pointer
+
+
 namespace GameAddress {
     DWORD baseModuleAddr;
     pLocalPlayer* localPlayerPtr;
+    // RECLASS doesn't support multi lever pointer very well
+    uint32_t* currentWeaponAmmo;
 }
 
 namespace CheatState {
@@ -16,10 +21,12 @@ namespace CheatState {
     bool isFreezeArmor = false;
     bool isFreezeAmmo = false;
     bool isFreezeNades = false;
+    DWORD lastWeaponAddr;
 }
 
 void OnExit(HMODULE hModule);
 void KeyCheck();
+void OnWeaponChangedCheck();
 void CheatCheck();
 void PrintConsoleStatus();
 
@@ -40,20 +47,34 @@ void CreateConsole() {
 }
 
 void Main(HMODULE hModule) {
-    std::cout << "Cheat injected\n";
+    std::cout << "Cheat Injected\n";
     GameAddress::baseModuleAddr =  (DWORD)GetModuleHandle(nullptr);
     std::cout << "Game Address found at: " << GameAddress::baseModuleAddr << "\n";
     GameAddress::localPlayerPtr = GetLocalPlayer();
     std::cout << "Local Player Address found at: " << GameAddress::localPlayerPtr << "\n";
+    // calculate address at current weapon ammo
+    GameAddress::currentWeaponAmmo = (uint32_t*) (*(DWORD*)((DWORD)GameAddress::localPlayerPtr->CurrentWeapon + Offset::currentWeaponAmmoOffset));
+    // cache last weapon address
+    CheatState::lastWeaponAddr = (DWORD)GameAddress::localPlayerPtr->CurrentWeapon;
 
     PrintConsoleStatus();
 
     while (!GetAsyncKeyState(VK_END)) { // press End to unload dll
+        OnWeaponChangedCheck();
         KeyCheck();
         CheatCheck();
     }
 
     OnExit(hModule);
+}
+
+void OnWeaponChangedCheck() {
+    if (CheatState::lastWeaponAddr != (DWORD)GameAddress::localPlayerPtr->CurrentWeapon) {
+        CheatState::lastWeaponAddr = (DWORD)GameAddress::localPlayerPtr->CurrentWeapon;
+        // set current weapon ammo pointer to new address
+        // re-calculate address at current weapon ammo
+        GameAddress::currentWeaponAmmo = (uint32_t*)(*(DWORD*)((DWORD)GameAddress::localPlayerPtr->CurrentWeapon + Offset::currentWeaponAmmoOffset));
+    }
 }
 
 void KeyCheck() {
@@ -82,15 +103,13 @@ void KeyCheck() {
 
 void CheatCheck() {
     if (CheatState::isFreezeHealth) {
-        GameAddress::localPlayerPtr->health = 100;
+        GameAddress::localPlayerPtr->health = 999;
     }
     if (CheatState::isFreezeArmor) {
-        GameAddress::localPlayerPtr->armor = 100;
+        GameAddress::localPlayerPtr->armor = 999;
     }
     if (CheatState::isFreezeAmmo) {
-        GameAddress::localPlayerPtr->rifleAmmo = 20;
-        GameAddress::localPlayerPtr->pistolAmmo = 12;
-        GameAddress::localPlayerPtr->dualPistolAmmo = 20;
+        *GameAddress::currentWeaponAmmo = 999;
     }
     // turn this on after you get a nades to avoid conflict
     if (CheatState::isFreezeNades) {

@@ -3,6 +3,7 @@
 
 namespace Offset {
 	DWORD localPlayerOffset = 0x109B74;
+	DWORD currentWeaponAmmoOffset = 0x14;
 }
 
 // Created with ReClass.NET 1.2 by KN4CK3R
@@ -28,9 +29,11 @@ public:
 	char pad_0138[4]; //0x0138
 	int32_t pistolAmmo; //0x013C
 	char pad_0140[16]; //0x0140
-	float rifleAmmo; //0x0150
+	int32_t rifleAmmo; //0x0150
 	char pad_0154[4]; //0x0154
 	int32_t nadesCount; //0x0158
 	int32_t dualPistolAmmo; //0x015C
-	char pad_0160[3808]; //0x0160
-}; //Size: 0x1040
+	char pad_0160[532]; //0x0160
+	void* CurrentWeapon; //0x0374
+	char pad_0378[4232]; //0x0378
+}; //Size: 0x1400
