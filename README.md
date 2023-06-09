@@ -9,7 +9,34 @@ Tool: Cheat Engine & Reclass
 ### Finding Local Player offset
 
 You can do that by scanning for health or ammo value then see what accesses the address, perform pointer scan to check and validate the correct pointer.
-We can get the offset via that pointer in CE.
+We can get the offset via that pointer in `Cheat Engine`.
+
+**Pointer**
+
+```
+Local Player Pointer: <ac_client.exe> + 0x00109B74
+Local Player Current Weapon Pointer: <ac_client.exe> + 0x00109B74 + 0x374
+```
+
+**Offset Class Local Player**
+
+```
+Position (x, y, z) : float : {0x4; 0x8; 0xC}
+View (pitch, yaw, roll) : float : {0x40; 0x44; 0x48}
+Health : int : 0xF8
+Armor : int : 0xFC
+Pistol Ammo : int : 0x13C
+Rifle Ammo : int : 0x150
+Nade Count : int : 0x158
+Dual Pistol Ammo : int : 0x15C
+Current Weapon Pointer : 0x374
+```
+
+**Ofsset Class Weapon**
+
+```
+Ammo : int : 0x14
+```
 
 ### Heading to Reclass
 
@@ -38,4 +65,8 @@ We can only freeze value by constantly writing to it.
 #### My first trainer:
 
 ![image](https://github.com/nmkha16/AssaultCube-Hack/assets/91834063/fdc8bcd0-7870-49ff-ba0e-c96297f3b65d)
+
+### Update
+
+I found a pointer to current weapon address that has current ammo on equiped gun => freeze this value to achieve infinite ammo on every gun. (Much better than old method)
 
