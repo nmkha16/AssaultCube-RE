@@ -6,12 +6,10 @@
 FILE* f = nullptr;
 HANDLE hConsole = nullptr;
 
-// multi-lever pointer
-
-
 namespace GameAddress {
     DWORD baseModuleAddr;
     pLocalPlayer* localPlayerPtr;
+    // multi-lever pointer
     // RECLASS doesn't support multi lever pointer very well
     uint32_t* currentWeaponAmmo;
 }
