@@ -1,5 +1,5 @@
 # AssaultCube-Hack
-My journey to reverse engineering and writing cheat. I will try to update as my journey goes on!
+My journey to reverse engineering.
 
 # DISCLAIMER
 **I do not tolerate any kind of cheating in multiplayer game to gain advantages over other players. This program is made for purely education purpose.**
