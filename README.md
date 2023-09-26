@@ -1,4 +1,4 @@
-# AssaultCube-Hack
+# AssaultCube-RE
 My journey to reverse engineering.
 
 # DISCLAIMER
